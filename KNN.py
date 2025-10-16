@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 
-# ===== Step 1: Load Dataset =====
+# ===== Load Dataset =====
 file_path = "framingham.csv"   # dataset you uploaded
 df = pd.read_csv(file_path)
 
@@ -14,31 +14,31 @@ print("Dataset Head:")
 print(df.head())
 print("\nColumns:", df.columns)
 
-# ===== Step 2: Handle Missing Values =====
+# ===== Handle Missing Values =====
 df = df.dropna()   # drop rows with missing values
 
-# ===== Step 3: Select Features =====
+# ===== Select Features =====
 # Choose 2 features for visualization
 X = df[["age", "totChol"]].values   # features
 y = df["TenYearCHD"].values         # target (0 = no disease, 1 = disease)
 
-# ===== Step 4: Train-Test Split =====
+# ===== Train-Test Split =====
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# ===== Step 5: Feature Scaling =====
+# ===== Feature Scaling =====
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# ===== Step 6: Train KNN =====
+# ===== Train KNN =====
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
 
-# ===== Step 7: Predictions =====
+# ===== Predictions =====
 y_pred = knn.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, y_pred))
 
-# ===== Step 8: Visualization with Decision Boundary =====
+# ===== Visualization with Decision Boundary =====
 h = 0.1  # step size in mesh
 
 # Create mesh grid
